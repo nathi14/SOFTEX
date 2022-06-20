@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>// necessário p/ as funções rand() e srand()
+#include <stdio.h>
+#include <time.h>//necessário p/ função time()
+int main(void)
+{
+  int i,*numeros,tamanho;
+  
+  printf("Informe um número menor ou igual do que 22 para o tamanho do vetor:\n\n");
+  scanf ("%d",&tamanho);
+  
+      while(tamanho > 22){
+          printf ("O número informado é maior do que 22, digite um número válido.");
+          scanf ("%d",&tamanho);
+           
+      }
+  
+  numeros = (int*) malloc(tamanho * sizeof(int));
+  if (numeros == NULL){
+      printf("Erro na alocação de memória. \n");
+      exit (1);
+  }
+
+  srand(time(NULL));
+  for (i=0; i < tamanho; i++)  {
+    numeros[i] =  rand() % 100;
+  }
+  
+  printf("Exibir números aleatórios. \n");
+  for (i=0; i < tamanho; i++)  {
+    printf (" %d", numeros[i]);
+  }
+
+  numeros = (int*) realloc(numeros, 22 * sizeof(int));
+  
+  srand(time(NULL));
+  for (i=0; i < 22; i++)  {
+    numeros[i] =  rand() % 100;
+  }
+  
+  printf("\nNúmeros aleatórios após realocação. \n");
+  for (i=0; i < 22; i++)  {
+    printf (" %d", numeros[i]);
+  }
+
+  
+  
+  getch();
+  free(numeros);
+  return 0;
+}
